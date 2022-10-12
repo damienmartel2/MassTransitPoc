@@ -1,4 +1,4 @@
-﻿namespace MassTransitLibrary.Contracts
+﻿namespace MassTransitLibrary.Contracts.MyMessage
 {
     public record MyMessage
     {

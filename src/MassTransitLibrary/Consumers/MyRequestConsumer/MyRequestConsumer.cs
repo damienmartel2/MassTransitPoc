@@ -1,5 +1,5 @@
 using MassTransit;
-using MassTransitLibrary.Contracts;
+using MassTransitLibrary.Contracts.MyRequest;
 using Microsoft.Extensions.Logging;
 
 namespace MassTransitLibrary.Consumers.MyMessageConsumer

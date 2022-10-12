@@ -1,7 +1,7 @@
 using MassTransit;
 using MassTransit.Testing;
 using MassTransitLibrary.Consumers.MyMessageConsumer;
-using MassTransitLibrary.Contracts;
+using MassTransitLibrary.Contracts.MyMessage;
 using Microsoft.Extensions.Logging;
 using Moq;
 

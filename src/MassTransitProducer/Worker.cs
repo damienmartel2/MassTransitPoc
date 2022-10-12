@@ -3,6 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using MassTransit;
 using MassTransitLibrary.Contracts;
+using MassTransitLibrary.Contracts.MyMessage;
+using MassTransitLibrary.Contracts.MyRequest;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -23,8 +25,8 @@ namespace MassTransitProducer
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            //await ProcessMessageAsync(stoppingToken);
-            await ProcessRequestAsync(stoppingToken);
+            await ProcessMessageAsync(stoppingToken);
+            //await ProcessRequestAsync(stoppingToken);
         }
 
         protected async Task ProcessMessageAsync(CancellationToken stoppingToken)
