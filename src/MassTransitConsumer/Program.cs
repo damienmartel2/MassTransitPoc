@@ -2,6 +2,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using MassTransit;
 using MassTransitLibrary.Consumers;
+using MassTransitLibrary.Consumers.MyTaskConsumer;
+using MassTransitLibrary.Contracts.MyTask;
+using MassTransitLibrary.StateMachines;
 using Microsoft.Extensions.Hosting;
 
 namespace MassTransitConsumer
@@ -23,7 +26,16 @@ namespace MassTransitConsumer
 
                         var entryAssembly = Assembly.GetAssembly(typeof(AnchorConsumer));
 
-                        x.AddConsumers(entryAssembly);
+                        //x.AddConsumers(entryAssembly);
+
+                        x.AddConsumer<MyTaskExportConsumer>(x =>
+                            x.ConsumerMessage<MyTask>(p => p.UseFilter(new TaskTypeFilter<MyTaskExportConsumer>())));
+
+                        x.AddConsumer<MyTaskLadRadConsumer>(x =>
+                        x.ConsumerMessage<MyTask>(p => p.UseFilter(new TaskTypeFilter<MyTaskLadRadConsumer>())));
+
+                        x.AddSagaStateMachine<OrderStateMachine, OrderState, OrderStateDefinition>()
+                            .InMemoryRepository();
 
                         x.UsingRabbitMq((context, cfg) =>
                         {

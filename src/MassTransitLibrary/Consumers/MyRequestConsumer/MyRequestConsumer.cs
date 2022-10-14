@@ -18,18 +18,18 @@ namespace MassTransitLibrary.Consumers.MyMessageConsumer
         {
             _logger.LogInformation($"Received request: {context.Message.Value}");
 
-            await context.RespondAsync<MyRequestReceived>(new MyRequestReceived()
-            {
-                Value = context.Message.Value,
-                ReceivedAt = InVar.Timestamp
-            });
-
-            //await context.RespondAsync<MyRequestRejected>(new MyRequestRejected()
+            //await context.RespondAsync<MyRequestReceived>(new MyRequestReceived()
             //{
             //    Value = context.Message.Value,
-            //    ReceivedAt = InVar.Timestamp,
-            //    Reason = "Ton message est bidon !"
+            //    ReceivedAt = InVar.Timestamp
             //});
+
+            await context.RespondAsync<MyRequestRejected>(new MyRequestRejected()
+            {
+                Value = context.Message.Value,
+                ReceivedAt = InVar.Timestamp,
+                Reason = "Ton message est bidon !"
+            });
         }
     }
 }
